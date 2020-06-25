@@ -71,9 +71,9 @@
     WHERE ITEMID = #{itemId}
   </select>
 
-  <update id="updateInventoryQuantity" parameterType="map">
+  <update id="updateInventoryQuantity" parameterType="Item">
     UPDATE INVENTORY SET
-      QTY = QTY - #{increment}
+      QTY = QTY - #{quantity}
     WHERE ITEMID = #{itemId}
   </update>
 
