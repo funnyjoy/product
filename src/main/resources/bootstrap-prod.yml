@@ -10,4 +10,4 @@ logging:
     com.netflix.hystrix: warn
     org.apache.http.impl: warn
     com.jpetstore.product: warn
-    feign: debug
+    feign: warn
