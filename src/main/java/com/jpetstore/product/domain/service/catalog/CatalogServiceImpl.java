@@ -20,6 +20,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Service;
 
 import com.jpetstore.product.domain.model.Category;
@@ -33,6 +35,7 @@ import com.jpetstore.product.domain.repository.product.ProductRepository;
  * @author Eduardo Macarron
  */
 @Service
+@RefreshScope
 public class CatalogServiceImpl implements CatalogService {
 
 	@Inject
@@ -43,6 +46,21 @@ public class CatalogServiceImpl implements CatalogService {
 
 	@Inject
 	private ProductRepository productRepository;
+
+	@Value("${service.pause}")
+	private boolean pause = false;
+
+	@Override
+	public boolean pause() {
+		this.pause = true;
+		return true;
+	}
+
+	@Override
+	public boolean resume() {
+		this.pause = false;
+		return true;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -140,10 +158,26 @@ public class CatalogServiceImpl implements CatalogService {
 
 	public void updateInventoryQuantity(Item item) {
 
+		if (this.pause) {
+			try {
+				Thread.sleep(120000);
+			}
+			catch (InterruptedException e) {
+			}
+		}
+
 		itemRepository.updateInventoryQuantity(item);
 	}
 
 	public int getInventoryQuantity(String itemId) {
+
+		if (this.pause) {
+			try {
+				Thread.sleep(120000);
+			}
+			catch (InterruptedException e) {
+			}
+		}
 
 		return itemRepository.getInventoryQuantity(itemId);
 	}

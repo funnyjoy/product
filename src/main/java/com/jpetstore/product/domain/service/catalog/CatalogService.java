@@ -8,6 +8,10 @@ import com.jpetstore.product.domain.model.Product;
 
 public interface CatalogService {
 
+	boolean pause();
+
+	boolean resume();
+
 	List<Category> getCategoryList();
 
 	Category getCategory(String categoryId);

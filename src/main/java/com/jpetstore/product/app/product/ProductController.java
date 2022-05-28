@@ -20,6 +20,16 @@ public class ProductController {
 	@Inject
 	protected CatalogService catalogService;
 
+	@RequestMapping("/pause")
+	public boolean pause() {
+		return catalogService.pause();
+	}
+
+	@RequestMapping("/resume")
+	public boolean resume() {
+		return catalogService.resume();
+	}
+
 	@RequestMapping("/categories")
 	public Iterable<Category> getCategoryList() {
 
