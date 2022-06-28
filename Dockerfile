@@ -11,7 +11,7 @@ WORKDIR /home/appuser
 ARG JAR_FILE 
 COPY target/${JAR_FILE} app.jar 
 
-ENV PROFILE=local 
+ENV PROFILE=prod 
 ENV SPRING_CLOUD_CONFIG_URI=http://configserver:8888
 ENV PRODUCT_PORT=17071
 ENV DATASOURCE_URL=jdbc:mariadb://productdb:33306/productdb
